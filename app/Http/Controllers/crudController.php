@@ -13,8 +13,9 @@ class crudController extends Controller
     {
 
         $animals = Animal::all();
+        $tipoanimal=TipoAnimal::all();
 
-        return view('animals.crud', ['animals'=> $animals]);
+        return view('animals.crud', ['animals'=> $animals, 'tipoanimal' => $tipoanimal]);
 
     }
 
@@ -27,10 +28,11 @@ class crudController extends Controller
     public function update(Request $request, $idanimal) {
         $animal = Animal::find($idanimal);
 
-        $animal->nombreAnimal = $request->input('nombreanimal');
-        $animal->descAnimal = $request->input('descanimal');
-        $animal->fechaNacimiento = $request->input('fechanacimiento');
-        $animal->idTipoAnimal = $request->input('idtipoanimal');
+        $animal->nombreanimal = $request->input('nombreanimal');
+        $animal->descanimal = $request->input('descanimal');
+        $animal->fechanacimiento = $request->input('fechanacimiento');
+        $animal->idtipoanimal = $request->input('idtipoanimal');
+
         $animal->save();
 
         return redirect()->route('crud')->with('success', 'Animal actualizado exitosamente');
@@ -59,13 +61,16 @@ class crudController extends Controller
 
     public function store(Request $request)
     {
-        $data['idanimal'] = $this->generateUniqueProductId();
+        // dd($request->all());
 
-        $data['nombreAnimal'] = $request->input('nombreanimal');
-        $data['descAnimal'] = $request->input('descanimal');
-        $data['fechanacimiento'] = $request->input('fechanacimiento');
-        $data['idTipoAnimal'] = $request->input('idtipoanimal');
-        Animal::create($data);
+
+        Animal::create([
+            'idanimal' => $this->generateUniqueProductId(),
+            'nombreanimal' => $request->nombreanimal,
+            'descanimal' => $request->descanimal,
+            'fechanacimiento' => $request->fechanacimiento,
+            'idtipoanimal' => $request->idtipoanimal,
+        ]);
 
         return redirect()->route('crud');
     }

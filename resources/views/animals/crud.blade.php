@@ -29,8 +29,12 @@
                 <td>{{$animal->nombreanimal}}</td>
                 <td>{{$animal->descanimal}}</td>
                 <td>{{$animal->fechanacimiento}}</td>
-                <td>{{$animal->idtipoanimal}}</td>
 
+
+                <td {{$tipoAnimal = $tipoanimal->firstWhere('idtipoanimal', $animal->idtipoanimal)}}>
+                    {{$tipoAnimal->nombretipoanimal }}
+                </td>
+                
                 <td>
                     <a href="{{route('edit', $animal->idanimal)}}" class="btn btn-primary">Editar</a>
                 </td>

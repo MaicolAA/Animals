@@ -9,7 +9,7 @@ class Animal extends Model
 {
     public $timestamps = false;
 
-    
+
 
     protected $primaryKey = 'idanimal';
 
@@ -17,9 +17,9 @@ class Animal extends Model
 
     protected $fillable = [
         'idanimal',
-        'nombreAnimal',
-        'descAnimal',
-        'fechaNacimiento',
-        'idTipoAnimal'
+        'nombreanimal',
+        'descanimal',
+        'fechanacimiento',
+        'idtipoanimal'
     ];
 }
